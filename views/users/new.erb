@@ -5,11 +5,16 @@
     <title></title>
   </head>
   <body>
-    <% if flash[:notice] %>
-      <div id='notice'><%= flash[:notice] %></div>
+    <% if flash[:errors] && !flash[:errors].empty? %>
+      Check this errors:
+      <ul id='errors'>
+        <% flash[:errors].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
     <% end %>
       <h1>Please sign up</h1><br>
-      <form action = '/sign_up' method = 'post'>
+      <form action = '/users/new' method = 'post'>
         <label for='name'>
           Name: <input type = 'text' name = 'name' value = '<%= @user.name %>'>
         </label>
@@ -26,6 +31,9 @@
           Password: <input type = 'password' name = 'password_confirmation'>
         </label>
         <input type = 'submit' value = 'Sign up!'>
+      </form>
+      <form action='/'>
+          <input type='submit' value='Home'>
       </form>
   </body>
 </html>

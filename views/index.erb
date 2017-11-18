@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chitter!</title>
+  </head>
+  <body>
+    <h1>Chitter</h1>
+    <form action='/users/new'>
+      <input type='submit' value='Sign up!'>
+    </form><br>
+    <form action='/sessions/new'>
+      <input type='submit' value='Log in!'>
+    </form><br>
+    <% if flash[:notice] %>
+      <div id='notice'><%= flash[:notice] %></div>
+    <% end %>
+  </body>
+</html>
