@@ -13,7 +13,14 @@ class Chitter < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
+    Peep.new
+    @peeps = Peep.all
+    @peeps.reverse!
     erb(:index)
+  end
+
+  get '/sessions/end' do
+    erb(:'sessions/end')
   end
 
   get '/users/new' do
@@ -42,6 +49,7 @@ class Chitter < Sinatra::Base
   get '/users' do
     Peep.new
     @peeps = Peep.all
+    @peeps.reverse!
     redirect '/' if session[:user_id] == nil
     erb(:users)
   end
@@ -69,8 +77,7 @@ class Chitter < Sinatra::Base
 
   delete '/sessions' do
     session[:user_id] = nil
-    flash.keep[:notice] = 'Sayonara!'
-    redirect to '/'
+    redirect to '/sessions/end'
   end
 
   helpers do

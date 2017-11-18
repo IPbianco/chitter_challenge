@@ -12,8 +12,12 @@
     <form action='/sessions/new'>
       <input type='submit' value='Log in!'>
     </form><br>
-    <% if flash[:notice] %>
-      <div id='notice'><%= flash[:notice] %></div>
-    <% end %>
+    
+    Last peeps:
+    <ul id='peeps'>
+      <% @peeps.each do |peep| %>
+        <li><%=User.get(peep.user_id).username%>: '<%=peep.message%>' --> <%=peep.time%></li>
+      <% end %>
+    </ul>
   </body>
 </html>
